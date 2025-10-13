@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Códigos Python | Henry Higinio Quispe Ramos - UNA-Puno</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --primary-light: #5dade2;
+            --secondary: #2ecc71;
+            --secondary-dark: #27ae60;
+            --accent: #e74c3c;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --bg: #ffffff;
+            --bg-light: #f8f9fa;
+            --bg-dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --error: #e74c3c;
+            --border: #dcdde1;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-light: linear-gradient(135deg, var(--primary-light), var(--accent));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg) 100%);
+            overflow: hidden;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .title-line {
+            display: block;
+        }
+
+        .highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-student {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+        }
+
+        .student-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .student-avatar.large {
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+        }
+
+        .student-info {
+            flex: 1;
+        }
+
+        .student-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .student-title {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .code-preview {
+            background: #2c3e50;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .code-header {
+            background: #34495e;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid #4a6378;
+        }
+
+        .code-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .code-dots span {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e74c3c;
+        }
+
+        .code-dots span:nth-child(2) {
+            background: #f39c12;
+        }
+
+        .code-dots span:nth-child(3) {
+            background: #2ecc71;
+        }
+
+        .code-header span {
+            color: #ecf0f1;
+            font-weight: 500;
+        }
+
+        .code-content {
+            padding: 1.5rem;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .code-line {
+            color: #ecf0f1;
+            margin-bottom: 0.5rem;
+        }
+
+        .keyword {
+            color: #3498db;
+        }
+
+        .function {
+            color: #9b59b6;
+        }
+
+        .string {
+            color: #2ecc71;
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .bg-light {
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            margin: 0 auto 1.5rem;
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        /* GitHub Section */
+        .github-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #333;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .github-btn:hover {
+            background: #555;
+            transform: translateY(-3px);
+        }
+
+        /* Códigos de Clase */
+        .codes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .code-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .code-card:hover::before {
+            width: 8px;
+        }
+
+        .code-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .code-badge {
+            background: var(--gradient);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .code-description {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .code-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: var(--bg-light);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+        }
+
+        .btn-code {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-code:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Información Personal */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .student-details h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .student-role {
+            color: var(--text-light);
+        }
+
+        .personal-data {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .data-group h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .data-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .data-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .data-content label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+        }
+
+        .data-content span {
+            display: block;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .info-card-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .course-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+        }
+
+        .detail-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .detail-content label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-content span {
+            display: block;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 1.5rem;
+            text-align: center;
+            color: #95a5a6;
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.25rem;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background: white;
+                width: 80%;
+                height: calc(100vh - 70px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .intro-content {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .codes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes typeWrite {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .code-line {
+            animation: typeWrite 0.5s both;
+        }
+
+        .code-card, .feature, .data-item, .detail-item {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .code-card:nth-child(1) { animation-delay: 0.1s; }
+        .code-card:nth-child(2) { animation-delay: 0.2s; }
+        .code-card:nth-child(3) { animation-delay: 0.3s; }
+        .code-card:nth-child(4) { animation-delay: 0.4s; }
+        .code-card:nth-child(5) { animation-delay: 0.5s; }
+        .code-card:nth-child(6) { animation-delay: 0.6s; }
+        .code-card:nth-child(7) { animation-delay: 0.7s; }
+        .code-card:nth-child(8) { animation-delay: 0.8s; }
+        .code-card:nth-child(9) { animation-delay: 0.9s; }
+        .code-card:nth-child(10) { animation-delay: 1.0s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="nav-brand">
+                    <div class="logo">
+                        <i class="fas fa-code"></i>
+                        <div class="logo-text">
+                            <span class="logo-title">Códigos Python</span>
+                            <span class="logo-subtitle">Henry Higinio Quispe Ramos</span>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#introduccion" class="nav-link">Introducción</a></li>
+                    <li><a href="#github" class="nav-link">GitHub</a></li>
+                    <li><a href="#codigos" class="nav-link">Códigos</a></li>
+                    <li><a href="#informacion" class="nav-link">Información</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-line">Códigos</span>
+                    <span class="title-line highlight">Python</span>
+                </h1>
+                <div class="hero-student">
+                    <div class="student-avatar">HQ</div>
+                    <div class="student-info">
+                        <p class="student-name">Henry Higinio Quispe Ramos</p>
+                        <p class="student-title">Estudiante de Ingeniería</p>
+                    </div>
+                </div>
+                <p class="hero-subtitle">Universidad Nacional del Altiplano Puno</p>
+                <p class="hero-text">Facultad de Ingeniería Estadística e Informática</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">40+</span>
+                        <span class="stat-label">Programas</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">Python</span>
+                        <span class="stat-label">Lenguaje</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">GitHub</span>
+                        <span class="stat-label">Repositorio</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-preview">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span>programa_clase.py</span>
+                    </div>
+                    <div class="code-content">
+                        <div class="code-line"><span class="keyword">def</span> <span class="function">sumar_numeros</span>(a, b):</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> a + b</div>
+                        <div class="code-line">&nbsp;</div>
+                        <div class="code-line"><span class="keyword">def</span> <span class="function">main</span>():</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;num1 = <span class="function">int</span>(<span class="keyword">input</span>(<span class="string">"Primer número: "</span>))</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;num2 = <span class="function">int</span>(<span class="keyword">input</span>(<span class="string">"Segundo número: "</span>))</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;resultado = <span class="function">sumar_numeros</span>(num1, num2)</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">print</span>(<span class="string">f"La suma es: {resultado}"</span>)</div>
+                        <div class="code-line">&nbsp;</div>
+                        <div class="code-line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">main</span>()</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introducción -->
+    <section id="introduccion" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Códigos Python</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Ejercicios y programas desarrollados en Python durante el curso</p>
+            </div>
+            
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h3>¿Qué encontrarás aquí?</h3>
+                    <p>Esta colección reúne más de 40 programas y ejercicios desarrollados durante el curso de Lenguajes de Programación, todos implementados en Python. Incluye desde programas básicos hasta implementaciones más complejas que hemos trabajado en clase.</p>
+                    
+                    <div class="intro-features">
+                        <div class="feature">
+                            <i class="fab fa-python"></i>
+                            <div>
+                                <h4>Python Puro</h4>
+                                <p>Todos los códigos están implementados exclusivamente en Python, aprovechando su sintaxis clara y versátil</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i class="fab fa-github"></i>
+                            <div>
+                                <h4>Integración con GitHub</h4>
+                                <p>Acceso directo a todos los archivos en GitHub para facilitar la descarga y visualización</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-book"></i>
+                            <div>
+                                <h4>Material de Estudio</h4>
+                                <p>Todos los programas incluyen comentarios y explicaciones para facilitar el aprendizaje y repaso</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3>Propósito Educativo</h3>
+                    <p>Esta colección tiene como objetivo principal servir como material de consulta y estudio para repasar los conceptos vistos en clase y practicar la resolución de problemas mediante programación en Python.</p>
+                </div>
+                <div class="intro-objectives">
+                    <h3>Temas Cubiertos</h3>
+                    <ul class="objectives-list">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Estructuras de control y funciones</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Manejo de listas y diccionarios</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Programación orientada a objetos</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Manejo de archivos y excepciones</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Algoritmos de búsqueda y ordenamiento</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Section -->
+    <section id="github" class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Repositorio GitHub</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Acceso directo a todos los archivos Python en GitHub</p>
+            </div>
+            
+            <div class="github-section">
+                <a href="https://github.com/henrryqr/portafolio-lptwo" class="github-btn" target="_blank">
+                    <i class="fab fa-github"></i>
+                    Ver todos los códigos en GitHub
+                </a>
+            </div>
+            
+            <div class="codes-grid">
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">GitHub</span>
+                    </div>
+                    <p class="code-description">Enlace directo al repositorio principal con todos los códigos Python organizados por temas y ejercicios.</p>
+                    <div class="code-tags">
+                        <span class="tag">Repositorio</span>
+                        <span class="tag">Principal</span>
+                        <span class="tag">Organizado</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo" class="btn-code" target="_blank">
+                        <i class="fab fa-github"></i>
+                        Acceder al Repositorio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Códigos Python -->
+    <section id="codigos" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Códigos Python</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Más de 40 programas desarrollados durante el curso</p>
+            </div>
+            
+            <div class="codes-grid">
+                <!-- Rectángulo -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Programa para calcular el área y perímetro de un rectángulo - Clase 1</p>
+                    <div class="code-tags">
+                        <span class="tag">Geometría</span>
+                        <span class="tag">Clase 1</span>
+                        <span class="tag">Rectángulo</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/rectangulo-clase1.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Producto -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Programa para calcular el producto de números</p>
+                    <div class="code-tags">
+                        <span class="tag">Matemáticas</span>
+                        <span class="tag">Producto</span>
+                        <span class="tag">Operaciones</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/producto.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Persona con métodos -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Clase Persona con métodos implementados - Clase 7</p>
+                    <div class="code-tags">
+                        <span class="tag">POO</span>
+                        <span class="tag">Clase 7</span>
+                        <span class="tag">Métodos</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/personametodos_clase7.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Números -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Programa para operaciones con números</p>
+                    <div class="code-tags">
+                        <span class="tag">Números</span>
+                        <span class="tag">Operaciones</span>
+                        <span class="tag">Básico</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/numeros.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Número múltiplo -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Programa para verificar si un número es múltiplo de otro</p>
+                    <div class="code-tags">
+                        <span class="tag">Múltiplos</span>
+                        <span class="tag">Condicionales</span>
+                        <span class="tag">Matemáticas</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/numeromultiplo.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Motor y Auto -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Clases Motor y Auto con relaciones - Clase 11</p>
+                    <div class="code-tags">
+                        <span class="tag">POO</span>
+                        <span class="tag">Clase 11</span>
+                        <span class="tag">Composición</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/motor%2Cauto-clase11.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Matplotlib -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Programa usando matplotlib para gráficos</p>
+                    <div class="code-tags">
+                        <span class="tag">Gráficos</span>
+                        <span class="tag">Matplotlib</span>
+                        <span class="tag">Visualización</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/import%20matplotlib.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Hipotenusa con métodos -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Cálculo de hipotenusa usando métodos - Clase 7</p>
+                    <div class="code-tags">
+                        <span class="tag">Geometría</span>
+                        <span class="tag">Clase 7</span>
+                        <span class="tag">Métodos</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/hipotenusametodos-clase7.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Gestor de tareas -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Sistema gestor de tareas con interfaz</p>
+                    <div class="code-tags">
+                        <span class="tag">Gestión</span>
+                        <span class="tag">Tareas</span>
+                        <span class="tag">Sistema</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/gestor%20de%20tareas.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Fibonacci -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Implementación de la secuencia Fibonacci</p>
+                    <div class="code-tags">
+                        <span class="tag">Algoritmos</span>
+                        <span class="tag">Fibonacci</span>
+                        <span class="tag">Secuencias</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/fibonacci.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Fibonacci Clase 3 -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Implementación de Fibonacci - Clase 3</p>
+                    <div class="code-tags">
+                        <span class="tag">Algoritmos</span>
+                        <span class="tag">Clase 3</span>
+                        <span class="tag">Fibonacci</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/fibonacci-clase3.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Fahrenheit -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Conversor de temperatura a Fahrenheit</p>
+                    <div class="code-tags">
+                        <span class="tag">Temperatura</span>
+                        <span class="tag">Conversión</span>
+                        <span class="tag">Física</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/ferenhei.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Factorial con Tkinter -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Cálculo de factorial con interfaz Tkinter - Clase 3</p>
+                    <div class="code-tags">
+                        <span class="tag">Tkinter</span>
+                        <span class="tag">Clase 3</span>
+                        <span class="tag">Interfaz</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/factorialtkinter-clase3.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Factorial -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Cálculo de factorial - Clase 3</p>
+                    <div class="code-tags">
+                        <span class="tag">Matemáticas</span>
+                        <span class="tag">Clase 3</span>
+                        <span class="tag">Factorial</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/factorial-clase3.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Empleado -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Clase Empleado con atributos y métodos</p>
+                    <div class="code-tags">
+                        <span class="tag">POO</span>
+                        <span class="tag">Empleado</span>
+                        <span class="tag">Clases</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/empleado.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Ejercicio de radio -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Ejercicio relacionado con radio y círculos</p>
+                    <div class="code-tags">
+                        <span class="tag">Geometría</span>
+                        <span class="tag">Radio</span>
+                        <span class="tag">Círculos</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/ejercio%20de%20radio.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Ejercicio de profesión -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Ejercicio sobre profesiones y clases</p>
+                    <div class="code-tags">
+                        <span class="tag">POO</span>
+                        <span class="tag">Profesiones</span>
+                        <span class="tag">Clases</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/ejercicio%20de%20profesion.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Ejercicio combinado -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Ejercicio combinado con múltiples funcionalidades</p>
+                    <div class="code-tags">
+                        <span class="tag">Combinado</span>
+                        <span class="tag">Ejercicio</span>
+                        <span class="tag">Múltiple</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/ejercicio%20de%20combinado.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Ejercicio 4 -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Ejercicio número 4 del curso</p>
+                    <div class="code-tags">
+                        <span class="tag">Ejercicio 4</span>
+                        <span class="tag">Práctica</span>
+                        <span class="tag">Curso</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/ejercicio%204.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Ejercicio 3 -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Ejercicio número 3 del curso</p>
+                    <div class="code-tags">
+                        <span class="tag">Ejercicio 3</span>
+                        <span class="tag">Práctica</span>
+                        <span class="tag">Curso</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/ejercicio%203.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Ejercicio 2 Pitágoras -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Ejercicio 2 sobre teorema de Pitágoras</p>
+                    <div class="code-tags">
+                        <span class="tag">Pitágoras</span>
+                        <span class="tag">Ejercicio 2</span>
+                        <span class="tag">Geometría</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/ejercicio%202%20pitagoras.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Ejercicio 2 de toma -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Ejercicio 2 sobre toma de decisiones</p>
+                    <div class="code-tags">
+                        <span class="tag">Decisiones</span>
+                        <span class="tag">Ejercicio 2</span>
+                        <span class="tag">Lógica</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/ejercicio%202%20de%20toma.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Ejercicio 1 Coche -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Ejercicio 1 sobre clase Coche</p>
+                    <div class="code-tags">
+                        <span class="tag">POO</span>
+                        <span class="tag">Ejercicio 1</span>
+                        <span class="tag">Coche</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/ejercicio%201%20coche.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Depósito de cuenta bancaria -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Sistema de depósito para cuenta bancaria</p>
+                    <div class="code-tags">
+                        <span class="tag">Banco</span>
+                        <span class="tag">Depósito</span>
+                        <span class="tag">Cuenta</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/depositode%20cuentaBancararia.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Coche primera clase -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Primera implementación de clase Coche</p>
+                    <div class="code-tags">
+                        <span class="tag">POO</span>
+                        <span class="tag">Coche</span>
+                        <span class="tag">Primera Clase</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/coche-primeraclase.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Clase 11 otro intento -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Otro intento de ejercicio de la Clase 11</p>
+                    <div class="code-tags">
+                        <span class="tag">Clase 11</span>
+                        <span class="tag">Práctica</span>
+                        <span class="tag">Ejercicio</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/clase%2011%20otro%20intento.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Círculos con métodos -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Clase Círculo con métodos - Clase 7</p>
+                    <div class="code-tags">
+                        <span class="tag">Geometría</span>
+                        <span class="tag">Clase 7</span>
+                        <span class="tag">Círculos</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/circulos%2Cetodos-clase7.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Círculo -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Programa para cálculos con círculos</p>
+                    <div class="code-tags">
+                        <span class="tag">Geometría</span>
+                        <span class="tag">Círculos</span>
+                        <span class="tag">Área</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/circulo.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Celsius -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Conversor de temperatura a Celsius</p>
+                    <div class="code-tags">
+                        <span class="tag">Temperatura</span>
+                        <span class="tag">Conversión</span>
+                        <span class="tag">Celsius</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/celsius.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Carreras de Tkinter -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Simulación de carreras usando Tkinter</p>
+                    <div class="code-tags">
+                        <span class="tag">Tkinter</span>
+                        <span class="tag">Carreras</span>
+                        <span class="tag">Simulación</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/carreras%20de%20tkinter.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Calculadora con métodos -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Calculadora implementada con métodos - Clase 7</p>
+                    <div class="code-tags">
+                        <span class="tag">Calculadora</span>
+                        <span class="tag">Clase 7</span>
+                        <span class="tag">Métodos</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/calculadorametodos-clase7.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Calculadora reemplazo -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Versión de reemplazo de calculadora</p>
+                    <div class="code-tags">
+                        <span class="tag">Calculadora</span>
+                        <span class="tag">Reemplazo</span>
+                        <span class="tag">Operaciones</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/calculadoraREMPLAZO.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Calculadora suma -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Calculadora básica para sumas</p>
+                    <div class="code-tags">
+                        <span class="tag">Calculadora</span>
+                        <span class="tag">Suma</span>
+                        <span class="tag">Básico</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/calculadora%20suma.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Alimentos -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Programa relacionado con alimentos y nutrición</p>
+                    <div class="code-tags">
+                        <span class="tag">Alimentos</span>
+                        <span class="tag">Nutrición</span>
+                        <span class="tag">Datos</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/alimentos.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- FACTORIAL (mayúsculas) -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Implementación de cálculo factorial</p>
+                    <div class="code-tags">
+                        <span class="tag">Factorial</span>
+                        <span class="tag">Matemáticas</span>
+                        <span class="tag">Algoritmos</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/FACTORIAL.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- EJERCICIO 1 (mayúsculas) -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Ejercicio número 1 del curso</p>
+                    <div class="code-tags">
+                        <span class="tag">Ejercicio 1</span>
+                        <span class="tag">Práctica</span>
+                        <span class="tag">Curso</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/EJERCICIO%201.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+                
+                <!-- Código de Curso -->
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="code-badge">Python</span>
+                    </div>
+                    <p class="code-description">Código principal del curso</p>
+                    <div class="code-tags">
+                        <span class="tag">Curso</span>
+                        <span class="tag">Principal</span>
+                        <span class="tag">Resumen</span>
+                    </div>
+                    <a href="https://github.com/henrryqr/portafolio-lptwo/blob/main/Codigo%20de%20Curso.py" class="btn-code" target="_blank">
+                        <i class="fas fa-code"></i>
+                        Ver en GitHub
+                    </a>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://github.com/henrryqr/portafolio-lptwo" class="btn-code" style="background: var(--secondary);" target="_blank">
+                    <i class="fab fa-github"></i>
+                    Ver Todos en GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Información Personal -->
+    <section id="informacion" class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Información Personal</h2>
+                <div class="section-divider"></div>
+                <p class="section-subtitle">Datos académicos y de contacto</p>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-header">
+                        <div class="student-avatar large">HQ</div>
+                        <div class="student-details">
+                            <h3>Henry Higinio Quispe Ramos</h3>
+                            <p class="student-role">Estudiante de Ingeniería</p>
+                        </div>
+                    </div>
+                    
+                    <div class="personal-data">
+                        <div class="data-group">
+                            <h4>Información Personal</h4>
+                            <div class="data-item">
+                                <div class="data-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="data-content">
+                                    <label>Nombre Completo</label>
+                                    <span>Henry Higinio Quispe Ramos</span>
+                                </div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-icon">
+                                    <i class="fas fa-id-card"></i>
+                                </div>
+                                <div class="data-content">
+                                    <label>Código Universitario</label>
+                                    <span>194926</span>
+                                </div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="data-content">
+                                    <label>Correo Electrónico</label>
+                                    <span>hequisper@est.unap.edu.pe</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="data-group">
+                            <h4>Contacto</h4>
+                            <div class="data-item">
+                                <div class="data-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="data-content">
+                                    <label>Teléfono</label>
+                                    <span>+51 987 654 321</span>
+                                </div>
+                            </div>
+                            <div class="data-item">
+                                <div class="data-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="data-content">
+                                    <label>Dirección</label>
+                                    <span>Puno, Perú</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-card">
+                    <h3 class="info-card-title">
+                        <i class="fas fa-book"></i>
+                        Información Académica
+                    </h3>
+                    
+                    <div class="course-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="detail-content">
+                                <label>Universidad</label>
+                                <span>Universidad Nacional del Altiplano Puno</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="detail-content">
+                                <label>Facultad</label>
+                                <span>Ingeniería Estadística e Informática</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="detail-content">
+                                <label>Carrera</label>
+                                <span>Ingeniería de Sistemas</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="detail-content">
+                                <label>Ciclo</label>
+                                <span>IV Ciclo</span>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <div class="detail-content">
+                                <label>Docente</label>
+                                <span>Ing. Coila Idme Leonel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Códigos Python</h4>
+                    <p>Este sitio web recopila más de 40 programas y ejercicios desarrollados durante el curso de Lenguajes de Programación, todos implementados en Python.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#introduccion"><i class="fas fa-chevron-right"></i> Introducción</a></li>
+                        <li><a href="#github"><i class="fas fa-chevron-right"></i> GitHub</a></li>
+                        <li><a href="#codigos"><i class="fas fa-chevron-right"></i> Códigos</a></li>
+                        <li><a href="#informacion"><i class="fas fa-chevron-right"></i> Información</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Puno, Perú</li>
+                        <li><i class="fas fa-envelope"></i> hequisper@est.unap.edu.pe</li>
+                        <li><i class="fas fa-phone"></i> +51 987 654 321</li>
+                        <li><i class="fab fa-github"></i> github.com/henrryqr</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Henry Higinio Quispe Ramos - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // JavaScript para funcionalidades interactivas
+        
+        // Menu Hamburguesa
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        // Cerrar menu al hacer clic en un enlace
+        document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+        
+        // Header scroll effect
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.style.display = 'flex';
+            } else {
+                scrollTopBtn.style.display = 'none';
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Animaciones al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, observerOptions);
+        
+        // Observar elementos para animación
+        document.querySelectorAll('.code-card, .feature, .data-item, .detail-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
